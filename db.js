@@ -1,15 +1,12 @@
+import "./config.js";
 import mongoose from "mongoose";
 
-module.exports = async function connection() {
-  try {
-    const connectionParams = {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    };
-    await mongoose.connect(process.env.DB, connectionParams);
-    console.log("connected to database.");
-  } catch (error) {
-    console.log(error, "could not connect to database.");
-  }
-};
+const mongoConnectionString = process.env.DB;
+
+mongoose
+  .connect(mongoConnectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DB Connection estabished!"))
+  .catch((err) => console.log("[ERROR] Connection failed", err));
