@@ -22,15 +22,4 @@ const userSchema = new Schema({
 
 const UserModel = mongoose.model("user", userSchema);
 
-const validate = (user) => {
-  const schema = Joi.object({
-    name: Joi.string().min(3).max(255).required(),
-    email: Joi.string().email().required(),
-  });
-  return schema.validate(user);
-};
-
-export default {
-  UserModel,
-  validate,
-};
+export default UserModel;

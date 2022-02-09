@@ -1,0 +1,12 @@
+@url= http://localhost:8080
+
+
+
+
+POST {{url}}
+content-type: application/json
+ 
+{
+    "name": "test",
+    "email": "test@mail.com"
+}

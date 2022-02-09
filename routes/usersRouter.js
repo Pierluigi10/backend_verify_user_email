@@ -1,11 +1,11 @@
-import sendEmail from "../utils/email";
+import sendEmail from "../utils/email.js";
 import TokenModel from "../models/tokenModel.js";
-import { User, validate } from "../models/user";
+import UserModel from "../models/usersModel.js";
+import validate from "../models/validate.js"
 // const crypto = import("crypto");
 import crypto from "crypto";
 import express from "express";
 
-i;
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -13,11 +13,11 @@ router.post("/", async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let user = await User.findOne({ email: req.body.email });
+    let user = await UserModel.findOne({ email: req.body.email });
     if (user)
       return res.status(400).send("User with given email already exist!");
 
-    user = await new User({
+    user = await new UserModel({
       name: req.body.name,
       email: req.body.email,
     }).save();
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 
 router.get("/verify/:id/:token", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.id });
+    const user = await UserModel.findOne({ _id: req.params.id });
     if (!user) return res.status(400).send("Invalid link");
 
     const token = await TokenModel.findOne({
