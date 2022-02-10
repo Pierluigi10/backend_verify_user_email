@@ -1,12 +1,12 @@
-@url= http://localhost:8080
+@url= http://localhost:8080/api
 
 
 
 
-POST {{url}}
+POST {{url}}/user
 content-type: application/json
  
 {
-    "name": "test",
-    "email": "test@mail.com"
+    "username": "test",
+    "email": "test101@gmail.com"
 }

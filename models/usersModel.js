@@ -4,7 +4,7 @@ import Joi from "joi";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
+  username: {
     type: String,
     min: 3,
     max: 255,

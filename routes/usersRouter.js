@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
       return res.status(400).send("User with given email already exist!");
 
     user = await new UserModel({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
     }).save();
 
@@ -47,7 +47,7 @@ router.get("/verify/:id/:token", async (req, res) => {
     });
     if (!token) return res.status(400).send("Invalid link");
 
-    await User.updateOne({ _id: user._id, verified: true });
+    await UserModel.updateOne({ _id: user._id, verified: true });
     await TokenModel.findByIdAndRemove(token._id);
 
     res.send("email verified sucessfully");
